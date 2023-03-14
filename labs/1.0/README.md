@@ -1,0 +1,104 @@
+[![infra as code with Terraform](/docs/images/banner.png)](/README.md)
+
+# The Basics
+
+For this lab exercise, our primary objective is to create a resource group on Azure. While the steps we take to accomplish this may seem excessive, they will serve as the building blocks for the remainder of the lab environment we'll be constructing.
+
+You'll find a file called "main.tf" aned other called "provider.tf" in this directory. Open them, as this is where we'll include the providers and resources required for this lab.
+
+## Step 1 - Providers
+
+Let's add the AzureRM resource provider of a specific version. To do this add the following to provider.tf
+We also want to add the "random" provider, as we have already discussed this will allow us to ensure our resource names and endpoints are unique.
+
+```
+terraform {
+    required_providers {
+        azurerm = {
+            source  = "hashicorp/azurerm"
+            version = ">= 3.9.0"
+        }
+
+        random = {
+            source  = "hashicorp/random"
+            version = ">= 3.1.0"
+        }
+    }
+    required_version = ">= 0.15"
+}
+
+provider "azurerm" {
+  features {}
+}
+
+```
+
+When Terraform goes through the initialisation process it will now know to add this specific provider.
+
+
+## Step 2 - Resource Group
+
+Now we have set up the providers we need, we will now create our resource group and link our random generator to it so we get a unique but consistent
+value for the life span of our resource group.
+
+Let's copy or write the following code in the file 'main.tf'
+
+```
+resource "azurerm_resource_group" "lab" {
+  name     = "lab-1-0"
+  location = "northeurope"
+}
+
+resource "random_id" "lab" {
+  keepers = {
+    resource_group = "${azurerm_resource_group.lab.name}"
+  }
+
+  byte_length = 2
+}
+```
+
+## Step 3 - Run Terraform
+
+To run Terraform we will need to open the terminal so we can run it locally. To do this right click on the directory for this lab and then click "open in terminal"
+
+### Login to Azure
+
+In the terminal type in the below and hit enter.
+
+```
+az login
+```
+
+This will open up a browser window and ask you to login.
+
+### Terraform init
+
+Now we have logged into Azure we can now initialise Terraform locally.
+
+```
+terraform init
+```
+
+This will now look at what providers we are using and download them ready for us to use. You will now see under the lab directory a new folder called ".terraform" open it up and take a look.
+
+### Terraform Apply
+
+Run terraform apply as shown below.
+
+```
+terraform apply
+```
+
+This will now create a plan and show us the output of the plan. You can see that it shows it wants to create a single resource and not delete or change any, which is good. 
+
+Type in "yes" and hit enter and it will go ahead and create the resource.
+
+You will also now see that we now have a .tfstate while which has been created. Open it up and take a look. This file is where we store the current "known good" state of our environment.
+
+### The results
+
+Open up the portal and if everything worked as expected you will now have a new resource group in your subscription.
+
+# Next Step
+[1.1 Adding Resources](../1.1)
