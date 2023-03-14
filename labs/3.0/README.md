@@ -49,7 +49,7 @@ terraform init
 
 You'll notice now that the init stage also grabs the source for the referenced module.
 
-![module init](/docs/images/module-init.PNG)
+![module init](/images/module-init.PNG)
 
 ```
 terraform apply
@@ -57,7 +57,7 @@ terraform apply
 
 And though we only defined the resource group in our parent Terraform file it still picks up and creates all required resource
 
-![module apply](/docs/images/module-apply.PNG)
+![module apply](/images/module-apply.PNG)
 
 ## Step 4 - Outputs
 
