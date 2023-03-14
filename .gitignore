@@ -9,3 +9,4 @@
 *.tfvars
 !lab*.tfvars
 labs/1.1/.terraform.lock.hcl
+~$Terraform Introduction.pptx
