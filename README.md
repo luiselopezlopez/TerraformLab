@@ -6,10 +6,10 @@ During this laboratories, we'll showcase the various capabilities of Terraform a
 
 ### First Deployments
 
-- [Lab 1.1 ](/labs/1.0/1.1-README)
-- [Lab 1.2 - Not infra, but environment](/labs/1.0/1.3-README)
-- [Lab 1.3 - Deletions](/labs/1.0/1.3-README)
-- [Lab 1.4 - Destroy](/labs/1.0/1.4-README)
+- [Lab 1.1](/labs/1.0/1.1-README.md)
+- [Lab 1.2](/labs/1.0/1.2-README.md)
+- [Lab 1.3](/labs/1.0/1.3-README.md)
+- [Lab 1.4](/labs/1.0/1.4-README.md)
 
 ### Making it more usable
 
