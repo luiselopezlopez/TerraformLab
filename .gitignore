@@ -8,3 +8,4 @@
 # .tfvars files
 *.tfvars
 !lab*.tfvars
+labs/1.1/.terraform.lock.hcl

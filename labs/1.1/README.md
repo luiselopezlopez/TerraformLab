@@ -1,4 +1,3 @@
-[![infra as code with Terraform](/docs/images/banner.png)](/README.md)
 
 # Adding Resources
 
@@ -9,17 +8,14 @@ Now we have created a resource group lets take a look at adding some resources t
 You will notice, inside main.tf, I have already added the basics from the previous lab included to help us move forward quickly. So let's get started by adding the service plan. As mentioned in the previous lab type this out to get a feel for the VSCode extensions.
 
 ```
-resource "azurerm_app_service_plan" "lab" {
+resource "azurerm_service_plan" "lab" {
   name                = "lab-plan"
   location            = "${azurerm_resource_group.lab.location}"
   resource_group_name = "${azurerm_resource_group.lab.name}"
-  kind                = "FunctionApp"
-
-  sku {
-    tier = "Dynamic"
-    size = "Y1"
-  }
+  os_type             = "Linux"  
+  sku_name            = "Y1"
 }
+
 ```
 
 The key things to notice here are we are using the "${}" syntax to reference other resources we have created, allowing us to re-use items such as the name and location of the resource group without using variables or having to manually re-construct them each time just as we do in ARM templates.
@@ -37,7 +33,7 @@ terraform apply
 Refer to the first lab if you need help getting the apply to run.
 
 
-## Step 2 - Adding additional to an existing environment.
+## Step 2 - Adding a Linux Function and it's associated Storage Account
 
 Now we have an environment with a service plan in it, what we want to do now is add a resource without re-creating the environment. So let's do this by adding an Azure Function which uses our plan we just created.
 
@@ -52,14 +48,16 @@ resource "azurerm_storage_account" "lab" {
   account_replication_type = "LRS"
 }
 
-resource "azurerm_function_app" "lab" {
-  name                      = "lab${random_id.lab.dec}"
-  location                  = "${azurerm_resource_group.lab.location}"
-  resource_group_name       = "${azurerm_resource_group.lab.name}"
-  app_service_plan_id       = "${azurerm_app_service_plan.lab.id}"
-  storage_connection_string = "${azurerm_storage_account.lab.primary_connection_string}"
+resource "azurerm_linux_function_app" "lab" {
+  name                       = "lab${random_id.lab.dec}"
+  location                   = "${azurerm_resource_group.lab.location}"
+  resource_group_name        = "${azurerm_resource_group.lab.name}"
+  service_plan_id            = "${azurerm_service_plan.lab.id}"
+  storage_account_name       = "${azurerm_storage_account.lab.name}"
+  storage_account_access_key = "${azurerm_storage_account.lab.primary_access_key}"
   
-  version = "~2"
+  site_config {}
+
 }
 ```
 
