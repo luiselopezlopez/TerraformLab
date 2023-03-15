@@ -20,24 +20,3 @@ During this laboratories, we'll showcase the various capabilities of Terraform a
 
 - [Lab 3.0 - Modules](/labs/3.0/README.md)
 
-### Run as ...
-
-- [Lab 4.0 - Silently run](/labs/4.0/README.md)
-- [Lab 4.1 - Shared state](/labs/4.1/README.md)
-
-### Working as a team
-
-- [Lab 5.0 - Variable Groups](/labs/5.0/README.md)
-- [Lab 5.1 - CI / CD Pipeline](/labs/5.1/README.md)
-
-### Secure by default
-
-- [Lab 6.0 - Managed Service Identity with Key Vault](/labs/6.0/README.md)
-
-### ARM within Terraform, not Terraform within ARM.
-
-- [Lab 7.0 - Using ARM to plug the gaps](/labs/7.0/README.md)
-
-### Congifure 3rd Partry resources on Azure
-
-- [Lab 8.0 - Configuring Kubernetes]()
