@@ -13,10 +13,10 @@ During this laboratories, we'll showcase the various capabilities of Terraform a
 
 ### Making it more usable
 
-- [Lab 2.0 - Variables](/labs/2.0/README.md)
-- [Lab 2.1 - Outputs](/labs/2.1/README.md)
+- [Lab 2.0](/labs/2.0/2.1-README.md)
+- [Lab 2.1](/labs/2.0/2.2-README.md)
 
 ### Modules
 
-- [Lab 3.0 - Modules](/labs/3.0/README.md)
+- [Lab 3.0](/labs/3.0/3.0-README.md)
 
